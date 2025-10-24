@@ -146,32 +146,32 @@ export default function ExamTaking({ exam, onComplete }: ExamTakingProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white shadow-sm border-b sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-xl font-bold text-gray-800">{exam.title}</h1>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-lg sm:text-xl font-bold text-gray-800 truncate">{exam.title}</h1>
               <p className="text-sm text-gray-600">
                 Question {currentQuestionIndex + 1} of {questions.length}
               </p>
             </div>
-            <div className="flex items-center space-x-6">
-              <div className="text-right">
-                <p className="text-sm text-gray-600">Answered</p>
-                <p className="text-lg font-bold text-gray-800">
+            <div className="flex items-center justify-between sm:justify-end space-x-4 sm:space-x-6">
+              <div className="text-center sm:text-right">
+                <p className="text-xs sm:text-sm text-gray-600">Answered</p>
+                <p className="text-base sm:text-lg font-bold text-gray-800">
                   {answeredCount}/{questions.length}
                 </p>
               </div>
               <div
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
+                className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-lg ${
                   timeLeft < 300 ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'
                 }`}
               >
-                <Clock className="w-5 h-5" />
-                <span className="text-lg font-bold">{formatTime(timeLeft)}</span>
+                <Clock className="w-4 sm:w-5 h-4 sm:h-5" />
+                <span className="text-base sm:text-lg font-bold">{formatTime(timeLeft)}</span>
               </div>
             </div>
           </div>
-          <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+          <div className="mt-3 sm:mt-4 w-full bg-gray-200 rounded-full h-2">
             <div
               className="bg-blue-600 h-2 rounded-full transition-all"
               style={{ width: `${progress}%` }}
@@ -180,21 +180,21 @@ export default function ExamTaking({ exam, onComplete }: ExamTakingProps) {
         </div>
       </div>
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {currentQuestion && (
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <div className="mb-8">
-              <div className="flex items-start justify-between mb-4">
-                <h2 className="text-2xl font-bold text-gray-800 flex-1">
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-8">
+            <div className="mb-6 sm:mb-8">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 space-y-2 sm:space-y-0">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 flex-1">
                   {currentQuestion.question_text}
                 </h2>
-                <span className="flex-shrink-0 ml-4 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+                <span className="flex-shrink-0 sm:ml-4 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold self-start">
                   {currentQuestion.marks} {currentQuestion.marks === 1 ? 'mark' : 'marks'}
                 </span>
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {['a', 'b', 'c', 'd'].map((option) => {
                 const optionText = currentQuestion[`option_${option}` as keyof Question] as string;
                 const isSelected = answers[currentQuestion.id] === option;
@@ -205,7 +205,7 @@ export default function ExamTaking({ exam, onComplete }: ExamTakingProps) {
                     onClick={() =>
                       handleAnswerSelect(currentQuestion.id, option as 'a' | 'b' | 'c' | 'd')
                     }
-                    className={`w-full text-left p-6 rounded-xl border-2 transition-all ${
+                    className={`w-full text-left p-4 sm:p-6 rounded-xl border-2 transition-all ${
                       isSelected
                         ? 'border-blue-500 bg-blue-50 shadow-md'
                         : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
@@ -213,19 +213,19 @@ export default function ExamTaking({ exam, onComplete }: ExamTakingProps) {
                   >
                     <div className="flex items-start">
                       <div
-                        className={`flex-shrink-0 w-8 h-8 rounded-full border-2 flex items-center justify-center mr-4 ${
+                        className={`flex-shrink-0 w-8 h-8 rounded-full border-2 flex items-center justify-center mr-3 sm:mr-4 ${
                           isSelected
                             ? 'border-blue-500 bg-blue-500 text-white'
                             : 'border-gray-300 text-gray-400'
                         }`}
                       >
-                        {isSelected && <CheckCircle className="w-5 h-5" />}
+                        {isSelected && <CheckCircle className="w-4 sm:w-5 h-4 sm:h-5" />}
                       </div>
-                      <div className="flex-1">
-                        <span className="font-semibold text-gray-700 mr-2">
+                      <div className="flex-1 min-w-0">
+                        <span className="font-semibold text-gray-700 mr-2 text-sm sm:text-base">
                           {option.toUpperCase()}.
                         </span>
-                        <span className="text-gray-800">{optionText}</span>
+                        <span className="text-gray-800 text-sm sm:text-base">{optionText}</span>
                       </div>
                     </div>
                   </button>
@@ -233,21 +233,21 @@ export default function ExamTaking({ exam, onComplete }: ExamTakingProps) {
               })}
             </div>
 
-            <div className="flex items-center justify-between mt-8 pt-6 border-t">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 sm:mt-8 pt-4 sm:pt-6 border-t space-y-4 sm:space-y-0">
               <button
                 onClick={() => setCurrentQuestionIndex((prev) => Math.max(0, prev - 1))}
                 disabled={currentQuestionIndex === 0}
-                className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 sm:px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 Previous
               </button>
 
-              <div className="flex space-x-3">
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3 order-first sm:order-none">
                 {questions.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentQuestionIndex(index)}
-                    className={`w-10 h-10 rounded-lg font-semibold transition ${
+                    className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg font-semibold transition text-xs sm:text-sm ${
                       index === currentQuestionIndex
                         ? 'bg-blue-600 text-white'
                         : answers[questions[index].id]
@@ -264,7 +264,7 @@ export default function ExamTaking({ exam, onComplete }: ExamTakingProps) {
                 <button
                   onClick={handleSubmit}
                   disabled={submitting}
-                  className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 sm:px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                 >
                   {submitting ? 'Submitting...' : 'Submit Exam'}
                 </button>
@@ -273,7 +273,7 @@ export default function ExamTaking({ exam, onComplete }: ExamTakingProps) {
                   onClick={() =>
                     setCurrentQuestionIndex((prev) => Math.min(questions.length - 1, prev + 1))
                   }
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
+                  className="px-4 sm:px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition text-sm sm:text-base"
                 >
                   Next
                 </button>

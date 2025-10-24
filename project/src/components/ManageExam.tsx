@@ -88,29 +88,29 @@ export default function ManageExam({ exam, onBack }: ManageExamProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <button
             onClick={onBack}
-            className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition"
+            className="flex items-center space-x-1 sm:space-x-2 text-gray-600 hover:text-gray-800 transition text-sm sm:text-base"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 sm:w-5 h-4 sm:h-5" />
             <span>Back to Dashboard</span>
           </button>
         </div>
       </nav>
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
             {exam ? 'Edit Exam' : 'Create New Exam'}
           </h2>
-          <p className="text-gray-600">Configure exam details and add questions</p>
+          <p className="text-gray-600 text-sm sm:text-base">Configure exam details and add questions</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md p-8 mb-6">
-          <h3 className="text-xl font-bold text-gray-800 mb-6">Exam Details</h3>
+        <div className="bg-white rounded-xl shadow-md p-4 sm:p-8 mb-6">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 sm:mb-6">Exam Details</h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Exam Title *
@@ -180,13 +180,13 @@ export default function ManageExam({ exam, onBack }: ManageExamProps) {
             </div>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <button
               onClick={handleSaveExam}
               disabled={saving || !title}
-              className="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center space-x-2 px-4 sm:px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
-              <Save className="w-5 h-5" />
+              <Save className="w-4 sm:w-5 h-4 sm:h-5" />
               <span>{saving ? 'Saving...' : 'Save Exam Details'}</span>
             </button>
           </div>
@@ -194,16 +194,16 @@ export default function ManageExam({ exam, onBack }: ManageExamProps) {
 
         {exam && (
           <div className="bg-white rounded-xl shadow-md p-8">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-gray-800">Questions</h3>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-3 sm:space-y-0">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800">Questions</h3>
               <button
                 onClick={() => {
                   setEditingQuestion(null);
                   setShowQuestionForm(true);
                 }}
-                className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+                className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm sm:text-base self-start sm:self-auto"
               >
-                <Plus className="w-5 h-5" />
+                <Plus className="w-4 sm:w-5 h-4 sm:h-5" />
                 <span>Add Question</span>
               </button>
             </div>
@@ -225,22 +225,22 @@ export default function ManageExam({ exam, onBack }: ManageExamProps) {
             )}
 
             {questions.length === 0 ? (
-              <p className="text-gray-500 text-center py-8">
+              <p className="text-gray-500 text-center py-6 sm:py-8 text-sm sm:text-base">
                 No questions added yet. Click "Add Question" to get started.
               </p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {questions.map((question, index) => (
                   <div
                     key={question.id}
-                    className="border border-gray-200 rounded-lg p-6 hover:border-gray-300 transition"
+                    className="border border-gray-200 rounded-lg p-4 sm:p-6 hover:border-gray-300 transition"
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <p className="font-semibold text-gray-800 mb-2">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 space-y-3 sm:space-y-0">
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-gray-800 mb-2 text-sm sm:text-base">
                           Q{index + 1}. {question.question_text}
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                           <p className="text-gray-600">A. {question.option_a}</p>
                           <p className="text-gray-600">B. {question.option_b}</p>
                           <p className="text-gray-600">C. {question.option_c}</p>
@@ -250,25 +250,27 @@ export default function ManageExam({ exam, onBack }: ManageExamProps) {
                           Correct Answer: {question.correct_answer.toUpperCase()}
                         </p>
                       </div>
-                      <div className="flex items-center space-x-2 ml-4">
+                      <div className="flex items-center justify-between sm:justify-end space-x-2 sm:ml-4">
                         <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                           {question.marks} marks
                         </span>
-                        <button
-                          onClick={() => {
-                            setEditingQuestion(question);
-                            setShowQuestionForm(true);
-                          }}
-                          className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition"
-                        >
-                          <Edit className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteQuestion(question.id)}
-                          className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => {
+                              setEditingQuestion(question);
+                              setShowQuestionForm(true);
+                            }}
+                            className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteQuestion(question.id)}
+                            className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -338,31 +340,31 @@ function QuestionForm({ examId, question, onSave, onCancel }: QuestionFormProps)
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-6 mb-6 border-2 border-blue-200">
-      <h4 className="font-bold text-gray-800 mb-4">
+    <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-4 sm:p-6 mb-6 border-2 border-blue-200">
+      <h4 className="font-bold text-gray-800 mb-4 text-sm sm:text-base">
         {question ? 'Edit Question' : 'New Question'}
       </h4>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Question *</label>
           <textarea
             value={questionText}
             onChange={(e) => setQuestionText(e.target.value)}
             rows={3}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm sm:text-base"
             required
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Option A *</label>
             <input
               type="text"
               value={optionA}
               onChange={(e) => setOptionA(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm sm:text-base"
               required
             />
           </div>
@@ -372,7 +374,7 @@ function QuestionForm({ examId, question, onSave, onCancel }: QuestionFormProps)
               type="text"
               value={optionB}
               onChange={(e) => setOptionB(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm sm:text-base"
               required
             />
           </div>
@@ -382,7 +384,7 @@ function QuestionForm({ examId, question, onSave, onCancel }: QuestionFormProps)
               type="text"
               value={optionC}
               onChange={(e) => setOptionC(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm sm:text-base"
               required
             />
           </div>
@@ -392,13 +394,13 @@ function QuestionForm({ examId, question, onSave, onCancel }: QuestionFormProps)
               type="text"
               value={optionD}
               onChange={(e) => setOptionD(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm sm:text-base"
               required
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Correct Answer *
@@ -406,7 +408,7 @@ function QuestionForm({ examId, question, onSave, onCancel }: QuestionFormProps)
             <select
               value={correctAnswer}
               onChange={(e) => setCorrectAnswer(e.target.value as 'a' | 'b' | 'c' | 'd')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm sm:text-base"
             >
               <option value="a">A</option>
               <option value="b">B</option>
@@ -420,7 +422,7 @@ function QuestionForm({ examId, question, onSave, onCancel }: QuestionFormProps)
               type="number"
               value={marks}
               onChange={(e) => setMarks(Number(e.target.value))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm sm:text-base"
               min="1"
               required
             />
@@ -428,18 +430,18 @@ function QuestionForm({ examId, question, onSave, onCancel }: QuestionFormProps)
         </div>
       </div>
 
-      <div className="flex space-x-3 mt-6">
+      <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0 mt-4 sm:mt-6">
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50"
+          className="px-4 sm:px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50 text-sm sm:text-base"
         >
           {saving ? 'Saving...' : 'Save Question'}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
+          className="px-4 sm:px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition text-sm sm:text-base"
         >
           Cancel
         </button>

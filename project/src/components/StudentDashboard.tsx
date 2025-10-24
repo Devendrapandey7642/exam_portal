@@ -62,28 +62,28 @@ export default function StudentDashboard({ onStartExam, onViewHistory }: Student
             <div className="flex items-center space-x-3">
               <BookOpen className="w-8 h-8 text-blue-600" />
               <div>
-                <h1 className="text-xl font-bold text-gray-800">Exam Portal</h1>
+                <h1 className="text-lg sm:text-xl font-bold text-gray-800">Exam Portal</h1>
                 <p className="text-xs text-gray-500">Student Dashboard</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="text-right">
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="text-right hidden sm:block">
                 <p className="text-sm font-medium text-gray-800">{profile?.full_name}</p>
                 <p className="text-xs text-gray-500">{profile?.email}</p>
               </div>
               <button
                 onClick={onViewHistory}
-                className="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition"
+                className="flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm"
               >
                 <History className="w-4 h-4" />
-                <span>History</span>
+                <span className="hidden sm:inline">History</span>
               </button>
               <button
                 onClick={() => signOut()}
-                className="flex items-center space-x-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                className="flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm"
               >
                 <LogOut className="w-4 h-4" />
-                <span>Logout</span>
+                <span className="hidden sm:inline">Logout</span>
               </button>
             </div>
           </div>
@@ -91,9 +91,9 @@ export default function StudentDashboard({ onStartExam, onViewHistory }: Student
       </nav>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Available Exams</h2>
-          <p className="text-gray-600">Select an exam to start</p>
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Available Exams</h2>
+          <p className="text-gray-600 text-sm sm:text-base">Select an exam to start</p>
         </div>
 
         {loading ? (
@@ -107,15 +107,15 @@ export default function StudentDashboard({ onStartExam, onViewHistory }: Student
             <p className="text-gray-600 text-lg">No exams available at the moment</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {exams.map((exam) => (
               <div
                 key={exam.id}
-                className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow p-6 border border-gray-100"
+                className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow p-4 sm:p-6 border border-gray-100"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{exam.title}</h3>
+                <div className="flex items-start justify-between mb-3 sm:mb-4">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 truncate">{exam.title}</h3>
                     <p className="text-gray-600 text-sm line-clamp-2">{exam.description}</p>
                   </div>
                   {hasAttempted(exam.id) && (
@@ -127,18 +127,18 @@ export default function StudentDashboard({ onStartExam, onViewHistory }: Student
 
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center text-sm text-gray-600">
-                    <Clock className="w-4 h-4 mr-2 text-blue-500" />
+                    <Clock className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
                     <span>{exam.duration_minutes} minutes</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
-                    <Trophy className="w-4 h-4 mr-2 text-yellow-500" />
-                    <span>{exam.total_marks} marks (Pass: {exam.passing_marks})</span>
+                    <Trophy className="w-4 h-4 mr-2 text-yellow-500 flex-shrink-0" />
+                    <span className="truncate">{exam.total_marks} marks (Pass: {exam.passing_marks})</span>
                   </div>
                 </div>
 
                 <button
                   onClick={() => onStartExam(exam)}
-                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-sm sm:text-base"
                 >
                   Start Exam
                 </button>

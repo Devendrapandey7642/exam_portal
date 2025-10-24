@@ -124,75 +124,137 @@ export default function AdminDashboard({ onManageExam }: AdminDashboardProps) {
             </button>
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-md overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Exam Title
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Duration
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Marks
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {exams.map((exam) => (
-                  <tr key={exam.id} className="hover:bg-gray-50 transition">
-                    <td className="px-6 py-4">
-                      <div>
-                        <p className="text-sm font-semibold text-gray-800">{exam.title}</p>
-                        <p className="text-xs text-gray-500 line-clamp-1">{exam.description}</p>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">{exam.duration_minutes} min</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
-                      {exam.total_marks} (Pass: {exam.passing_marks})
-                    </td>
-                    <td className="px-6 py-4">
-                      <button
-                        onClick={() => toggleExamStatus(exam)}
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          exam.is_active
-                            ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        } transition`}
-                      >
-                        {exam.is_active ? 'Active' : 'Inactive'}
-                      </button>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center justify-end space-x-2">
-                        <button
-                          onClick={() => onManageExam(exam)}
-                          className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition"
-                          title="Edit exam"
-                        >
-                          <Edit className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteExam(exam.id)}
-                          className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition"
-                          title="Delete exam"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
+          <>
+            {/* Desktop Table View */}
+            <div className="hidden md:block bg-white rounded-xl shadow-md overflow-hidden">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      Exam Title
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      Duration
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      Marks
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      Status
+                    </th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      Actions
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {exams.map((exam) => (
+                    <tr key={exam.id} className="hover:bg-gray-50 transition">
+                      <td className="px-6 py-4">
+                        <div>
+                          <p className="text-sm font-semibold text-gray-800">{exam.title}</p>
+                          <p className="text-xs text-gray-500 line-clamp-1">{exam.description}</p>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-600">{exam.duration_minutes} min</td>
+                      <td className="px-6 py-4 text-sm text-gray-600">
+                        {exam.total_marks} (Pass: {exam.passing_marks})
+                      </td>
+                      <td className="px-6 py-4">
+                        <button
+                          onClick={() => toggleExamStatus(exam)}
+                          className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            exam.is_active
+                              ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          } transition`}
+                        >
+                          {exam.is_active ? 'Active' : 'Inactive'}
+                        </button>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center justify-end space-x-2">
+                          <button
+                            onClick={() => onManageExam(exam)}
+                            className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition"
+                            title="Edit exam"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteExam(exam.id)}
+                            className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition"
+                            title="Delete exam"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-4">
+              {exams.map((exam) => (
+                <div
+                  key={exam.id}
+                  className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg font-bold text-gray-800 mb-1 truncate">{exam.title}</h3>
+                      <p className="text-sm text-gray-500 line-clamp-2">{exam.description}</p>
+                    </div>
+                    <button
+                      onClick={() => toggleExamStatus(exam)}
+                      className={`ml-3 px-3 py-1 rounded-full text-xs font-semibold flex-shrink-0 ${
+                        exam.is_active
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
+                    >
+                      {exam.is_active ? 'Active' : 'Inactive'}
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+                    <div>
+                      <p className="text-gray-600">Duration</p>
+                      <p className="font-semibold text-gray-800">{exam.duration_minutes} min</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600">Total Marks</p>
+                      <p className="font-semibold text-gray-800">{exam.total_marks}</p>
+                    </div>
+                    <div className="col-span-2">
+                      <p className="text-gray-600">Passing Marks</p>
+                      <p className="font-semibold text-gray-800">{exam.passing_marks}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => onManageExam(exam)}
+                      className="flex-1 flex items-center justify-center space-x-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-semibold"
+                    >
+                      <Edit className="w-4 h-4" />
+                      <span>Edit</span>
+                    </button>
+                    <button
+                      onClick={() => handleDeleteExam(exam.id)}
+                      className="flex-1 flex items-center justify-center space-x-2 px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm font-semibold"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      <span>Delete</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </main>
     </div>
